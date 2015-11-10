@@ -71,8 +71,9 @@ If a filename cannot be found, the resulting JSON object will look like this:
 ### Requirements
 
 * [Scitools' Understand](http://scitools.com)
-* [Python 3](https://www.python.org/)
+* [Python 3](https://www.python.org/) 
 * [NumPy](http://www.numpy.org) and [SciPy](http://www.scipy.org/)
+* [Node.js](https://nodejs.org/en/) for the dependencies endpoint
  
 
 ### Demo
