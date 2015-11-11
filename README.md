@@ -11,6 +11,8 @@ To run the complete set of analyses on the latest revision in mozilla-central an
 scripts/analyzeMozillaCentral.sh 
 ```
 
+![Code Quality](https://dl.dropboxusercontent.com/u/20109708/code-quality.png "Code Quality")
+
 ### Modifying things
 * ``data/modules.txt``: contains the set of directories that constitute modules (the current ones may not be accurate)
 * ``data/filter.txt``: contains the set of files and directories that we omit from the analysis
