@@ -3,25 +3,25 @@ import sys
 import time
 import datetime
 
-#get revision name
+# get revision name
 dirs = os.listdir('understand_in')
 revision = ''
 for file in dirs:
    if file[0] != '.':
      revision = file.split('-')[2]
 
-#add timestamp and revision name to metrics_out/full_metrics.csv
+# add timestamp and revision name to metrics_out/full_metrics.csv
 ts = time.time()
 analysis_datetime = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%dT%H:%M:%SZ')
 
-#add all metrics from metrics_out/loc_mccabe_metrics.csv to metrics_out/full_metrics.csv
+# add all metrics from metrics_out/loc_mccabe_metrics.csv to metrics_out/full_metrics.csv
 loc_mccabe_lines = [line.rstrip('\n') for line in open('metrics_out/loc_mccabe_metrics.csv')]
 
-#add all metrics from metrics_out/dependency_metrics.csv to metrics_out/full_metrics.csv
+# add all metrics from metrics_out/dependency_metrics.csv to metrics_out/full_metrics.csv
 dependency_lines = [line.rstrip('\n') for line in open('metrics_out/dependency_metrics.csv')]
 matlab_metrics = dependency_lines[1].split(",")
 
-#append to full_metrics.csv
+# append to full_metrics.csv
 module = 'all'
 if len(sys.argv) > 1:
   module = sys.argv[1] 

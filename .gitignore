@@ -2,6 +2,7 @@
 *.udb
 scripts/understand_in
 scripts/process_in
+scripts/scipy_in
 scripts/matlab_in
 scripts/misc
 scripts/metrics_out

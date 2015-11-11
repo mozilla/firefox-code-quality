@@ -1,7 +1,7 @@
 import os
 import codequality
 
-dir = 'matlab_in'
+dir = 'scipy_in'
 the_data = ''
 file_list = []
 
@@ -18,7 +18,7 @@ with open('metrics_out/dependency_metrics.csv', 'w') as fid:
   for i, current_data_file in enumerate(file_list):
     print(i + 1, ' Processing ', current_data_file)
 
-    the_data = codequality.metrics('matlab_in/' + current_data_file)
+    the_data = codequality.metrics('scipy_in/' + current_data_file)
 
     fid.write(the_data + '\n')
     print(i + 1, ' Processed ', current_data_file)

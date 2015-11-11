@@ -120,10 +120,10 @@ def raiseAllPowers(initial_matrix, max_paths):
     matrix_squared.data.fill(1)
 
     # nnz elements    
-    print(len(matrix_squared.nonzero()[0]), len(matrices[current_path_length].nonzero()[0]))
+    print(matrix_squared.nnz, matrices[current_path_length].nnz)
 
     # when we've achieved the transitive closure of our matrix, we're done
-    if len(matrix_squared.nonzero()[0]) == len(matrices[current_path_length].nonzero()[0]):
+    if matrix_squared.nnz == matrices[current_path_length].nnz:
       done = 1
       continue
     else:
@@ -141,14 +141,16 @@ def getFiFo(dsmProp):
   return [FI, FO]
 
 
-# credit https://gist.github.com/kevinavery/9613505
 def loadDsm(filename):
-  DATA = np.loadtxt(filename, delimiter=',')
-  dims = DATA.shape[1] - 1
-  shape = [np.max(DATA[:,i]) for i in range(dims)]
-  M = np.zeros(shape=shape)
-  for row in DATA:
-    index = tuple(row[:-1] - 1)
-    M.itemset(index, row[-1])
+  data = np.loadtxt(filename, delimiter=',')
 
-  return M
+  # get max index and build a square matrix
+  max_index = np.maximum(data.max(0)[0], data.max(0)[1])
+  shape = [max_index, max_index]
+
+  matrix = np.zeros(shape=shape)
+  for row in data:
+    index = tuple(row[:-1] - 1)
+    matrix.itemset(index, row[-1])
+
+  return matrix
