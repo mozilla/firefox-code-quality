@@ -76,7 +76,7 @@
                 min_y: loc_min,
                 max_y: loc_max,
                 title: "Lines of code",
-                description: "LOC measures the number executable lines of code in each revision, ignoring comments and blank lines. LOC and defect density have an inverse relationship due to architecture not changing at the same rate as LOC and architectural elements such as interfaces having a higher propensity for defects than individual components. <b>Lower is better.</b>",
+                description: "The number of executable lines of code in each revision, ignoring comments and blank lines. <b>Lower is better.</b>",
                 data: data,
                 markers: markers,
                 width: global.trunk.width,
@@ -103,7 +103,7 @@
                 max_y: mccabe_max,
                 markers: markers,
                 title: "Cyclomatic complexity",
-                description: "Cyclomatic complexity measures the number of linearly independent paths within a software system, or within a function or class. Here, the measure is the total number of independent paths divided by the total number of lines of code, per 1,000 LOC. So a cyclomatic complexity value of 200, means that there are around 200 independent paths in every 1,000 lines of code.<br /><a href='https://en.wikipedia.org/wiki/Cyclomatic_complexity' target='_blank'>Read more</a>. <b>Lower is better.</b>",
+                description: "The number of linearly independent paths within a revision per 1,000 lines of code. So a cyclomatic complexity value of 200 means that there are around 200 independent paths in every 1,000 lines of code. <a href='https://en.wikipedia.org/wiki/Cyclomatic_complexity' target='_blank'>Read more</a>. <b>Lower is better.</b>",
                 data: data,
                 width: global.trunk.width,
                 height: global.trunk.height,
@@ -121,7 +121,7 @@
 
             MG.data_graphic({
                 title: "Dependencies",
-                description: "First-order density measures the number of direct dependencies between files. Here, we show dependencies as the number of files that a randomly chosen file can directly impact. Per the static analysis tool's <a href='http://scitools.com/documents/manuals/pdf/understand.pdf' target='_blank'>manual</a>, 'an item depends on another if it includes, calls, sets, uses, casts, or refers to that item.' <b>Lower is better.</b>",
+                description: "The number of files that the average file can directly impact. Per the static analysis tool's manual, 'an item depends on another if it includes, calls, sets, uses, casts, or refers to that item.' <b>Lower is better.</b>",
                 data: data,
                 markers: markers,
                 width: global.trunk.width,
@@ -140,7 +140,7 @@
 
             MG.data_graphic({
                 title: "Propagation",
-                description: "Propagation measures direct as well as indirect dependencies between files in a codebase. In practical terms, it gives a sense of the actual reach of a change to a randomly chosen file. We calculate the propagation for each file through a process of matrix multiplication&mdash;see <a href='http://almossawi.com/firefox/prose' target='_blank'>this</a> and <a href='http://www.hbs.edu/faculty/Publication%20Files/05-016.pdf' target='_blank'>this</a>. <br /><b>Lower is better.</b>",
+                description: "The proportion of files in a revision that are connected, either directly or indirectly. In practical terms, propagation gives a sense of the total reach of a change to a file. We calculate propagation through a process of matrix multiplication&mdash;see <a href='http://almossawi.com/firefox/prose' target='_blank'>this</a> and <a href='http://www.hbs.edu/faculty/Publication%20Files/05-016.pdf' target='_blank'>this</a>. <br /><b>Lower is better.</b>",
                 data: data,
                 markers: markers,
                 width: global.trunk.width,
@@ -160,7 +160,7 @@
 
             MG.data_graphic({
                 title: "Highly interconnected files",
-                description: "Highly interconnected files are files that are interconnected via a chain of cyclic dependencies. These are files that have a fan-out that's higher than the median fan-out in the revision and a fan-in that's higher than the median fan-in in the revision. Highly interconnected files are naturally correlated with propagation, but provide alternative ways of looking at complexity. For more, see <a href='http://almossawi.com/firefox/prose/' target='_blank'>this</a>. <b>Lower is better.</b>",
+                description: "Files that are interconnected via a chain of cyclic dependencies. These are pairs of files in a revision that have a lot of dependencies between each other. Highly interconnected files are naturally correlated with propagation, but provide alternative ways of looking at complexity, which is useful. For more, see <a href='http://almossawi.com/firefox/prose/' target='_blank'>this</a>. <b>Lower is better.</b>",
                 data: data,
                 markers: markers,
                 width: global.trunk.width,
@@ -187,7 +187,7 @@
                 min_y: Math.floor(files_min),
                 max_y: Math.ceil(files_max),
                 title: "Files",
-                description: "The number of files in the revision, not counting <a href='scripts/data/filter.txt' target='_blank'>filtered files</a>, tests and forked code, which currently includes <i>ipc/chromium</i>. <b>Lower is better.</b>",
+                description: "The number of files in a revision, not counting <a href='scripts/data/filter.txt' target='_blank'>filtered files</a>, tests and forked code, which currently includes <i>ipc/chromium</i>. <b>Lower is better.</b>",
                 data: data,
                 markers: markers,
                 width: global.trunk.width,
