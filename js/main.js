@@ -7,7 +7,7 @@
             height: 220,
             left: 0,
             right: 60,
-            xax_count: 4
+            xax_count: 3
         }
     };
 
@@ -88,6 +88,7 @@
                 x_accessor: 'date',
                 y_accessor: 'CountLineCode',
                 linked: true,
+                linked_format: "%Y-%m-%d-%H-%M",
                 interpolate: 'basic',
                 mouseover: mouseover()
             });
@@ -113,6 +114,7 @@
                 x_accessor: 'date',
                 y_accessor: 'mccabe',
                 linked: true,
+                linked_format: "%Y-%m-%d-%H-%M",
                 interpolate: 'basic',
                 mouseover: mouseover()
             });
@@ -131,6 +133,7 @@
                 x_accessor: 'date',
                 y_accessor: 'dependencies_per_10k',
                 linked: true,
+                linked_format: "%Y-%m-%d-%H-%M",
                 interpolate: 'basic',
                 mouseover: mouseover()
             });
@@ -150,6 +153,7 @@
                 x_accessor: 'date',
                 y_accessor: 'prop_cost',
                 linked: true,
+                linked_format: "%Y-%m-%d-%H-%M",
                 interpolate: 'basic',
                 mouseover: mouseover()
             });
@@ -169,6 +173,7 @@
                 x_accessor: 'date',
                 y_accessor: 'core',
                 linked: true,
+                linked_format: "%Y-%m-%d-%H-%M",
                 interpolate: 'basic',
                 mouseover: mouseover()
             });
@@ -194,6 +199,7 @@
                 x_accessor: 'date',
                 y_accessor: 'files',
                 linked: true,
+                linked_format: "%Y-%m-%d-%H-%M",
                 interpolate: 'basic',
                 mouseover: mouseover()
             });
