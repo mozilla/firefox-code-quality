@@ -187,7 +187,7 @@
                 min_y: Math.floor(files_min),
                 max_y: Math.ceil(files_max),
                 title: "Files",
-                description: "The number of files in the revision that match our <a href='scripts/data/filter.txt' target='_blank'>set of filters</a>, minus tests and forked code, which currently includes <i>ipc/chromium</i>. <b>Lower is better.</b>",
+                description: "The number of files in the revision, not counting <a href='scripts/data/filter.txt' target='_blank'>filtered files</a>, tests and forked code, which currently includes <i>ipc/chromium</i>. <b>Lower is better.</b>",
                 data: data,
                 markers: markers,
                 width: global.trunk.width,
