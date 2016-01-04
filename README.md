@@ -80,3 +80,6 @@ If a filename cannot be found, the resulting JSON object will look like this:
 
 ### Demo
 [https://metrics.mozilla.com/code-quality](https://metrics.mozilla.com/code-quality)
+
+### Blog post
+[https://blog.mozilla.org/metrics/2015/12/01/measuring-code-quality](https://blog.mozilla.org/metrics/2015/12/01/measuring-code-quality)
