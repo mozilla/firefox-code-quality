@@ -16,18 +16,22 @@ scripts/analyzeMozillaCentral.sh
 ### Modifying things
 * ``data/modules.txt``: contains the set of directories that constitute modules (the current ones may not be accurate)
 * ``data/filter.txt``: contains the set of files and directories that we omit from the analysis
-* ``getLatestSource.py``: contains the path to the codebase that we'll be analyzing
+* ``getSource.py``: contains the path to the codebase that we'll be analyzing
 
 ### How the script works
 The script (``analyzeMozillaCentral.sh``) takes approximately 30 minutes to complete and runs twice a day. It performs the following tasks:
 
-1. Pulls the latest revision from mozilla-central (``getLatestSource.py``)
+1. Pulls the latest revision from mozilla-central (``getSource.py``)
 2. Performs static analysis on the codebase to get LOC, cyclomatic complexity and dependency data (``generateProjectMetrics.py``)
 3. Generates a hash table from the dependency data (``extractFilesAndDeps.py``)
 4. Gets dependencies, propagation cost and highly-interconnected files data (`generateDepMetrics.py`)
 5. Writes the entire set of data to be graphed to ``metrics_out/full_metrics-all.csv`` (``addToFullMetrics.py``)
 
 The script then goes through the above steps for each of the modules in ``data/modules.txt``. Once the script terminates, the respective directories under ``scripts`` will be populated, allowing you to both view the data in the dashboard at ``index.html`` and make use of the dependencies endpoint.
+
+### Analyzing older revisions
+
+You can generate metrics for older revisions by running ``analyzeMozillaCentralHistorical.sh 2016-01-01`` where the first parameter is the date you're interested in. At present, the script pulls one of potentially several revisions for that date, runs the analysis on it, and writes the metrics out to files as you would expect.
 
 ### Dependencies endpoint
 
