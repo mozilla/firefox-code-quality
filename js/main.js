@@ -10,6 +10,7 @@
             xax_count: 3
         },
         timescale: 'monthly',
+        module: 'all',
         daily_time_window: 2
     };
 
@@ -35,9 +36,9 @@
         });
 
         //set the active pill and section on first load
-        var module = (document.location.hash) ? document.location.hash.slice(1) : 'all';
-        d3.select('#goto-' + module).classed('active', true);
-        drawCharts(module);
+        global.module = (document.location.hash) ? document.location.hash.slice(1) : 'all';
+        d3.select('#goto-' + global.module).classed('active', true);
+        drawCharts(global.module);
 
         //event listener for module switch
         $('ul.switch li a.pill').on('click', function(event) {
@@ -45,10 +46,10 @@
             $('ul.switch li a.pill').removeClass('active');
             $(this).addClass('active');
 
-            var module = $(this).attr('id').slice(5);
-            document.location.hash = module;
+            global.module = $(this).attr('id').slice(5);
+            document.location.hash = global.module;
 
-            drawCharts(module);
+            drawCharts(global.module);
 
             return false;
         });
@@ -60,11 +61,48 @@
             $(this).addClass('active');
 
             global.timescale = $(this).attr('id');
-            drawCharts();
+            drawCharts(global.module);
 
             return false;
         });
     });
+
+    function filterTimeScale(data) {
+        if(global.timescale == 'monthly') {
+            var data_ht = {};
+
+            data = data.map(function(d) {
+                var month = d.date.getMonth();
+                var year = d.date.getFullYear();
+                data_ht[year + '-' + month] = d;
+            });
+            
+            data = d3.values(data_ht);
+        //are we filtering for daily view? (show only last six months)
+        } else if(global.timescale == 'daily') {
+            var latest = d3.max(data, function(d) {
+                return d.date;
+            });
+
+            //x months ago
+            var month = (latest.getMonth() - global.daily_time_window) % 12
+            var day = latest.getDate();
+            var year = (latest.getMonth() < 0) 
+                ? latest.getFullYear() - 1
+                : latest.getFullYear();
+
+            var x_months_ago = new Date();
+            x_months_ago.setFullYear(year)
+            x_months_ago.setMonth(month)
+            x_months_ago.setDate(day)
+
+            data = data.filter(function(d) {
+                return d.date > x_months_ago;
+            });
+        }
+
+        return data;
+    }
 
     function drawCharts(module) {
         if(module == undefined) { module = 'all'; }
@@ -82,38 +120,7 @@
             });
 
             //are we filtering for monthly view? (show only first day)
-            if(global.timescale == 'monthly') {
-                var data_ht = {};
-
-                data = data.map(function(d) {
-                    var month = d.date.getMonth();
-                    var year = d.date.getFullYear();
-                    data_ht[year + '-' + month] = d;
-                });
-                
-                data = d3.values(data_ht);
-            //are we filtering for daily view? (show only last six months)
-            } else if(global.timescale == 'daily') {
-                var latest = d3.max(data, function(d) {
-                    return d.date;
-                });
-
-                //x months ago
-                var month = (latest.getMonth() - global.daily_time_window) % 12
-                var day = latest.getDate();
-                var year = (latest.getMonth() < 0) 
-                    ? latest.getFullYear() - 1
-                    : latest.getFullYear();
-
-                var x_months_ago = new Date();
-                x_months_ago.setFullYear(year)
-                x_months_ago.setMonth(month)
-                x_months_ago.setDate(day)
-
-                data = data.filter(function(d) {
-                    return d.date > x_months_ago;
-                });
-            }
+            data = filterTimeScale(data);
 
             var loc_min = d3.min(data, function(d) { return +d.CountLineCode; });
             loc_min -=  loc_min * 0.01;
