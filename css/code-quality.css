@@ -111,11 +111,11 @@ ul.switch {
     border-top: 1px solid #3b3b3b;
     clear: both;
     font-size: 1.2rem;
-    margin-bottom: 20px;
     padding: 17px 0 17px 0;
 }
 
-ul.switch li {
+ul.switch li,
+ul.timescale li {
     display: inline-block;
     list-style: none;
     padding-right: 15px;
@@ -123,6 +123,14 @@ ul.switch li {
 
 ul.switch li.no-padding {
     padding: 0;
+}
+
+ul.timescale {
+    border: 0;
+    clear: both;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    padding: 0 0 17px 0;
 }
 
 .pill {

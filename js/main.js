@@ -8,7 +8,9 @@
             left: 0,
             right: 60,
             xax_count: 3
-        }
+        },
+        timescale: 'monthly',
+        daily_time_window: 2
     };
 
     var mouseover = function() {
@@ -37,7 +39,7 @@
         d3.select('#goto-' + module).classed('active', true);
         drawCharts(module);
 
-        //event listeners
+        //event listener for module switch
         $('ul.switch li a.pill').on('click', function(event) {
             event.preventDefault();
             $('ul.switch li a.pill').removeClass('active');
@@ -47,6 +49,18 @@
             document.location.hash = module;
 
             drawCharts(module);
+
+            return false;
+        });
+
+        //event listener for timescale switch
+        $('ul.timescale li a.pill').on('click', function(event) {
+            event.preventDefault();
+            $('ul.timescale li a.pill').removeClass('active');
+            $(this).addClass('active');
+
+            global.timescale = $(this).attr('id');
+            drawCharts();
 
             return false;
         });
@@ -66,6 +80,40 @@
                  d.core = d.core_size / d.files;
                  d.dependencies_per_10k = d.first_order_density * d.files;
             });
+
+            //are we filtering for monthly view? (show only first day)
+            if(global.timescale == 'monthly') {
+                var data_ht = {};
+
+                data = data.map(function(d) {
+                    var month = d.date.getMonth();
+                    var year = d.date.getFullYear();
+                    data_ht[year + '-' + month] = d;
+                });
+                
+                data = d3.values(data_ht);
+            //are we filtering for daily view? (show only last six months)
+            } else if(global.timescale == 'daily') {
+                var latest = d3.max(data, function(d) {
+                    return d.date;
+                });
+
+                //x months ago
+                var month = (latest.getMonth() - global.daily_time_window) % 12
+                var day = latest.getDate();
+                var year = (latest.getMonth() < 0) 
+                    ? latest.getFullYear() - 1
+                    : latest.getFullYear();
+
+                var x_months_ago = new Date();
+                x_months_ago.setFullYear(year)
+                x_months_ago.setMonth(month)
+                x_months_ago.setDate(day)
+
+                data = data.filter(function(d) {
+                    return d.date > x_months_ago;
+                });
+            }
 
             var loc_min = d3.min(data, function(d) { return +d.CountLineCode; });
             loc_min -=  loc_min * 0.01;

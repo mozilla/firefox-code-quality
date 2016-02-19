@@ -6,12 +6,12 @@ if [ "$1" != "dont_pull" ]
 then
   rm -rf understand_in/*
   rm -rf understand_in/*
-  python3 getLatestSource.py
+  python3 getSource.py
 
   rm currentBuild-*.udb
 fi
 
-#g et path (eg. understand_in/mozilla-central-a1ccea59e254)
+# get path (eg. understand_in/mozilla-central-a1ccea59e254)
 REVISION=()
 for FILE in understand_in/*; do
   [[ -d $FILE ]] && REVISION+=("$FILE")
@@ -24,6 +24,7 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
   # removing files is faster and more reliable than und remove
   rm -rf './'$REVISION'/'$line
 done < 'data/filter.txt'
+
 
 analyzeModule() {
   MOD=$1
@@ -54,6 +55,7 @@ analyzeModule() {
   # other two metrics_out files
   python3 addToFullMetrics.py $MOD
 }
+
 
 # analyze modules
 while IFS='' read -r line || [[ -n "$line" ]]; do
