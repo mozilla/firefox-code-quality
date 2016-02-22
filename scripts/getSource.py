@@ -27,13 +27,20 @@ def getChangeSetString(year, month, day):
   filelist = pattern.findall(string)
   filename = filelist[0][:-1]
 
-  # read second line
+  # read the changeset string
   urlpath = urllib.request.urlopen(dir + filename)
   string = urlpath.read().decode('utf-8')
-  bits = string.split('/')
-  changeset = bits[len(bits) - 1].rstrip()
 
-  return changeset
+  # let's check the last bit of the url
+  bits = string.split('/')
+
+  # if we don't have a url, then we're pre-2012 and we'll retrieve the second string
+  if len(bits) == 1:
+    bits = string.split()
+    return str(bits[1]).rstrip()
+  # otherwise, retrieve that last bit from the url on the second line
+  else:
+    return bits[len(bits) - 1].rstrip()
 
 
 # pulls the tarball for the specified changeset from hg.mozilla.org
