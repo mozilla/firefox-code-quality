@@ -73,6 +73,61 @@ If a filename cannot be found, the resulting JSON object will look like this:
 }
 ```
 
+### Function-level metrics endpoint
+
+To get function-level metrics for a given file, you can call the following endpoint--the URL is temporary and will change once [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1219410) is resolved:
+
+``http://almossawi.com:3003/functions/filename=xpcom:glue:nsINIParser.cpp``
+
+The response is a JSON object like this:
+
+```javascript
+{
+  "file": "accessible/jsat/EventManager.jsm",
+  "functions": [
+    {
+      "name": "handleAccEvent",
+      "loc": "84",
+      "loc_code": "76",
+      "mccabe": "15"
+    },
+    {
+      "name": "handleEvent",
+      "loc": "35",
+      "loc_code": "33",
+      "mccabe": "9"
+    },
+    {
+      "name": "start",
+      "loc": "22",
+      "loc_code": "18",
+      "mccabe": "3"
+    },
+    {
+      "name": "stop",
+      "loc": "17",
+      "loc_code": "16",
+      "mccabe": "3"
+    },
+    {
+      "name": "EventManager",
+      "loc": "12",
+      "loc_code": "12",
+      "mccabe": "1"
+    }
+  ]
+}
+```
+
+If a filename cannot be found, the resulting JSON object will look like this:
+
+```javascript
+{
+  error: 'File name missing or does not exist in the codebase, usage: http://almossawi.com:3003/functions/filename=accessible:jsat:EventManager.jsm'
+}
+```
+
+It's currently not possible to get call-graphs and dependencies for functions, seeing as the units that Understand [generates dependencies for are classes and files](https://scitools.com/documents/manuals/python/understand.html#Ent-depends).
 
 ### Requirements
 
