@@ -22,6 +22,7 @@ analyzeModule() {
   echo $REVISION'/'$MOD
   und analyze -db $DB_NAME
   python3 generateProjectMetrics.py $DB_NAME > metrics_out/loc_mccabe_metrics.csv
+  python3 generateProjectMetricsFunctionLevel.py $DB_NAME > metrics_out/function_level_metrics.csv
   und export -dependencies file csv process_in/dependencies.csv -db $DB_NAME
 
   # process dependencies
