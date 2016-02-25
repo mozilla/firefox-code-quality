@@ -35,7 +35,7 @@ You can generate metrics for older revisions by running ``analyzeMozillaCentralH
 
 ### Dependencies endpoint
 
-To get the set of files that depend on some arbitrary file in the latest revision (fan-in) or the files that that file depends on (fan-out), you can call the following endpoint--the URL is temporary and will change once [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1219410) is resolved:
+To get the set of files that depend on some arbitrary file in the latest revision (fan-in) or the files that that file depends on (fan-out), you can call the following endpoint--the URL is temporary and will change once [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1224318) is resolved:
 
 ``http://almossawi.com:3003/deps/filename=xpcom:glue:nsINIParser.cpp``
 
@@ -75,7 +75,7 @@ If a filename cannot be found, the resulting JSON object will look like this:
 
 ### Function-level metrics endpoint
 
-To get function-level metrics for a given file, you can call the following endpoint--the URL is temporary and will change once [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1219410) is resolved:
+To get function-level metrics for a given file, you can call the following endpoint--the URL is temporary and will change once [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1224318) is resolved:
 
 ``http://almossawi.com:3003/functions/filename=xpcom:glue:nsINIParser.cpp``
 
