@@ -54,6 +54,10 @@ analyzeModule() {
 
   # add date and revision number to full_metrics.csv and then data from the 
   # other two metrics_out files
+  if [ -z "$MOD" ]; then
+    MOD="all"
+  fi
+
   python3 addToFullMetrics.py $MOD
 }
 

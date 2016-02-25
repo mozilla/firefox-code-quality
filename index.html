@@ -30,9 +30,13 @@
 <body>
     <div class='container'>
         <div class='row'>
-            <div class='col-lg-12'>
+            <div class='col-lg-12 text-center'>
                 <h1 class='text-center'>Code Quality</h1>
-                <p class='text-center'>Architectural measures of complexity for revisions in <a href='https://hg.mozilla.org/mozilla-central/'>mozilla-central</a>. Click on a data point to view details about that revision. To view the fan-in and fan-out for any file in the latest revision, you can use <a href='http://almossawi.com:3003/deps/filename=accessible:jsat:EventManager.jsm'>this endpoint</a>&mdash;the address will change once <a href='https://bugzilla.mozilla.org/show_bug.cgi?id=1224318'>this bug</a> is resolved.</p>
+                <p class='text-center'>Architectural measures of complexity for revisions in <a href='https://hg.mozilla.org/mozilla-central/'>mozilla-central</a>. Click on a data point to view details about that revision. 
+                Other things you might be interested in doing with the data from the latest revision&mdash;the address will change once <a href='https://bugzilla.mozilla.org/show_bug.cgi?id=1224318'>this bug</a> is resolved.</p>
+                <a href='http://almossawi.com:3003/deps/filename=accessible:jsat:EventManager.jsm'>1. View a file's dependencies</a> &nbsp; &nbsp;
+                <a href='http://almossawi.com:3003/functions/filename=accessible:jsat:EventManager.jsm'>2. View a file's function-level metrics</a>
+
                 <ul class='switch text-center'>
                     <li><a href='#' id='goto-all' class='pill'>All modules</a></li>
                 </ul>
