@@ -77,7 +77,7 @@ If a filename cannot be found, the resulting JSON object will look like this:
 
 To get function-level metrics for a given file, you can call the following endpoint--the URL is temporary and will change once [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1224318) is resolved:
 
-``http://almossawi.com:3003/functions/filename=xpcom:glue:nsINIParser.cpp``
+``http://almossawi.com:3003/functions/filename=accessible:jsat:EventManager.jsm``
 
 The response is a JSON object like this:
 
